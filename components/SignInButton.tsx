@@ -20,7 +20,7 @@ const SigninButton = () => {
   
     }
     return (
-        <Button onClick={() => signIn("trakt")}>
+        <Button onClick={() => signIn("BugFix")}>
             <Mail className="mr-2 h-4 w-4" /> Please Login!
         </Button>
     );

@@ -3,8 +3,7 @@ import './globals.css';
 import Providers from '@/components/Providers';
 
 export const metadata: Metadata = {
-  title: 'trakt.tv',
-  description: 'Discover and share , movies, tv shows and more.',
+  title: 'BugFixer!',
 }
 
 export default function RootLayout({
