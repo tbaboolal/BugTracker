@@ -8,7 +8,9 @@ function Header() {
     <header className='fixed w-full z-50 top-0 flex items-center justify-between p-5'>
         
         <div className='flex items-center space-x-2'>
-          <SigninButton />
+          <Link href="/CreateTicketPage/new">
+            <p>create ticket </p> 
+          </Link>
           
         </div>
     </header>
