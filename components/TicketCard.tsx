@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useState } from 'react';
+import EditTicketForm from './EditForm';
 
 interface TicketProps {
     ticket: {
@@ -13,9 +14,12 @@ interface TicketProps {
 }
 
 const TicketCard: React.FC<TicketProps> = ({ ticket }) => {
-    const { title, description, priority, progress, status, receiveNotifications } = ticket;
+    const [isEditing, setIsEditing] = useState(false);
 
-    // Function to convert priority number to label
+    const handleEditClick = () => {
+        setIsEditing(true);
+    };
+
     const priorityLabel = (num: number) => {
         switch (num) {
             case 1: return "Low";
@@ -27,20 +31,24 @@ const TicketCard: React.FC<TicketProps> = ({ ticket }) => {
         }
     };
 
+    if (isEditing) {
+        return <EditTicketForm ticket={ticket} />;
+    }
+
     return (
         <div className="m-4 p-6 max-w-sm bg-white rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700">
-            <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">{title}</h5>
-            <p className="mb-3 font-normal text-gray-700 dark:text-gray-400">{description}</p>
-            <p className="text-sm text-gray-600 dark:text-gray-400">Priority: {priorityLabel(priority)}</p>
-            <p className="text-sm text-gray-600 dark:text-gray-400">Progress: {progress}%</p>
-            <p className="text-sm text-gray-600 dark:text-gray-400">Status: {status}</p>
-            {receiveNotifications && (
+            <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">{ticket.title}</h5>
+            <p className="mb-3 font-normal text-gray-700 dark:text-gray-400">{ticket.description}</p>
+            <p className="text-sm text-gray-600 dark:text-gray-400">Priority: {priorityLabel(ticket.priority)}</p>
+            <p className="text-sm text-gray-600 dark:text-gray-400">Progress: {ticket.progress}%</p>
+            <p className="text-sm text-gray-600 dark:text-gray-400">Status: {ticket.status}</p>
+            {ticket.receiveNotifications && (
                 <span className="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
                     Notifications Enabled
                 </span>
             )}
             <div className="mt-4">
-                <button type="button" className="inline-flex items-center py-2 px-3 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                <button type="button" onClick={handleEditClick} className="inline-flex items-center py-2 px-3 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
                     Edit Ticket
                 </button>
             </div>
