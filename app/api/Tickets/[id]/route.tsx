@@ -26,3 +26,14 @@ export async function PUT(req: any,   {params: { id }}: Props) {
       return NextResponse.json({ message: "Error", error }, { status: 500 });
     }
   }
+
+export async function DELETE(req: any, {params: { id }}: Props) {
+    try {
+      console.log(id);
+      await Ticket.findByIdAndDelete(id);
+      return NextResponse.json({ message: "Ticket Deleted" }, { status: 200 });
+    } catch (error) {
+      console.log(error);
+      return NextResponse.json({ message: "Error", error }, { status: 500 });
+  }
+}

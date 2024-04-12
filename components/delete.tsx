@@ -11,6 +11,7 @@ const DeleteBlock = ({ id }: { id: any }) => {
             if (res.ok) {
                 console.log("Ticket deleted successfully.");
                 router.refresh();
+                window.location.reload()
             } else {
                 console.error("Failed to delete ticket. Status:", res.status);
             }
